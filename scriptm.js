@@ -1,4 +1,4 @@
-let [millisecond, second, minute] = [0,0,0];
+let [milliseconds, second, minute,] = [0,0,0];
 // console.log(milliseconds);
 let timeRef = document.querySelector('.stopwatch');
 let int = null;
@@ -20,9 +20,9 @@ document.getElementById('reset').addEventListener('click', () => {
 
 
 function timer() {
-    millisecond+=10;
-    if (millisecond==1000) {
-        millisecond=0;
+    milliseconds+=10;
+    if (milliseconds==1000) {
+        milliseconds=0;
         second++;
         if (second==60) {
             second=0;
@@ -55,7 +55,7 @@ function timer() {
 
 let m = minute < 10 ? '0' + minute : minute;
 let s = second < 10 ? "0" + second : second;
-let ms = millisecond < 10 ? "00" + millisecond : millisecond < 100 ? "0" + millisecond : millisecond;
+let ms = milliseconds < 10 ? "00" + milliseconds : milliseconds < 100 ? "0" + milliseconds : milliseconds;
 
 timeRef.innerHTML= `${m} : ${s} : ${ms}`;
 
