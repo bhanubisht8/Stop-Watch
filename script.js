@@ -1,81 +1,69 @@
 let [milliseconds, second, minute,] = [0,0,0];
 // console.log(milliseconds);
-let timeRef = document.querySelector('.stopwatch');
-let int = null;
-
-document.getElementById('start').addEventListener('click', () => {
-    if (int !== null) {
-        clearInterval(int);
-    }
-    int = setInterval(timer, 10);
-});
-document.getElementById('stop').addEventListener('click', () => {
-    clearInterval(int);
-});
-document.getElementById('reset').addEventListener('click', () => {
-    clearInterval(int);
-    [milliseconds, seconds, minutes, hours] = [0, 0, 0];
-    timeRef.innerHTML = '00 : 00 : 00';
-});
+let min = document.querySelector('.mn');
+let sec = document.querySelector('.sc');
+let mili = document.querySelector('.msc');
+let counter = false;
+let myMs = 0;
+let mySc = 0;
+let myMin = 0;
 
 
-function timer() {
-    milliseconds+=10;
-    if (milliseconds==1000) {
-        milliseconds=0;
-        second++;
-        if (second==60) {
-            second=0;
-            minute++
-            if (minute==60) {
-                minute=0;
-            }
-        }
+
+
+function start() {
+    counter = true;
+    startTimer();
+}
+
+function stop() {
+    counter=false;
+    // console.log('hi from stop');
+    console.log(counter);
+
+}
+function reset() {
+    counter=false;
+    myMs = 0;
+    mySc = 0;
+    myMin = 0;
+    min.innerHTML = myMin;
+    sec.innerHTML = mySc;
+    mili.innerHTML = myMs;
+    // console.log('hi from reset');
+
+}
+
+function startTimer(){
+    if (counter == true) {
+        setInterval(setIntervalFunction, 10);
     }
 }
 
-
-// function start() {
-//     if (int !== null) {
-//         clearInterval(int);
-//     }
-//     int = setInterval(timer, 10);
-//     console.log('hi from start');
-// }
-// function stop() {
-//     clearInterval(int);
-//     console.log('hi from stop');
-// }
-// function reset() {
-//     clearInterval(int);
-//     [milliseconds, second, minute] = [0,0,0];
-//     time.innerHTML= '00 : 00 : 00';
-//     console.log('hi from reset');
-// }
-
-let m = minute < 10 ? '0' + minute : minute;
-let s = second < 10 ? "0" + second : second;
-let ms = milliseconds < 10 ? "00" + milliseconds : milliseconds < 100 ? "0" + milliseconds : milliseconds;
-
-timeRef.innerHTML= `${m} : ${s} : ${ms}`;
-
+function setIntervalFunction() {
+    if (counter) {
+        myMs ++;
+        if (myMs==100) {
+            myMs=0;
+            mySc++;
+            if (mySc==60) {
+                mySc=0;
+                myMin++;
+            }
+        }
+    }
+    
+   
+    
+    let m = myMin < 10 ? '0' + myMin : myMin;
+    let s = mySc < 10 ? '0' + mySc : mySc;
+    let milsec = myMs < 10 ? '0' + myMs : myMs;
+    
+    mili.innerHTML = milsec;
+    sec.innerHTML = s;
+    min.innerHTML = m;
+}
 
 
 
-// let s1 = document.getElementById("start");
-// s1.addEventListener('click', () => {
-//     int = setInterval(timer, 10);
-// })
 
-// let s2 = document.getElementById('stop');
-// s2.addEventListener('click', () => {
-// clearInterval(int);
-// })
-
-// let r1 = document.getElementById('reset');
-// r1.addEventListener('click', ()=> {
-//     clearInterval(int);
-//     [milliseconds, second, minute] = [0,0,0];
-//     time.innerHTML= '00 :00 : 00';
-
-// })
